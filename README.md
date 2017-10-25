@@ -1,6 +1,6 @@
 # StellarisModGrabber
 
-Grabs Stellaris mods for MP sessions.
+Makes switching around mods for MP games easier.
 
 I created this program because I got tired of manually editing mods in and out and then not even having the right ones downloaded.
 So I made this.
