@@ -2,6 +2,8 @@
 
 Makes switching around mods for MP games easier.
 
+## ![Download](https://github.com/GamingWolf/StellarisModGrabber/releases)
+
 ## What it does it do?
 It can grab your last activate mods, back up your current config, clear all active mods and override your current mod list with a new one. 
 
