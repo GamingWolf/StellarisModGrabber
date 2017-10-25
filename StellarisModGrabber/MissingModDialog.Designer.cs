@@ -49,7 +49,8 @@
             this.Notice_lbl.Name = "Notice_lbl";
             this.Notice_lbl.Size = new System.Drawing.Size(327, 29);
             this.Notice_lbl.TabIndex = 2;
-            this.Notice_lbl.Text = "List has not been written to settings.txt!\r\nDownload missing mods and try again.";
+            this.Notice_lbl.Text = "List has not been written to settings.txt!\r\nDownload missing mods below and try a" +
+    "gain.";
             this.Notice_lbl.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // MissingModDialog
