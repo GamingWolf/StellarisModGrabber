@@ -2,10 +2,18 @@
 
 Makes switching around mods for MP games easier.
 
-I created this program because I got tired of manually editing mods in and out and then not even having the right ones downloaded.
-So I made this.
+## What it does it do?
+It can grab your last activated mods, back up your current config, clear all active mods and override your current mod list with a new one. 
+
+It will also check the mods you have currently downloaded(read: subscribed on the workshop) and tell you if you are missing one and provide a link to the missing mod. As of now it will tell you which file you are missing, it will look like this "mod/ugc_826432049.mod" (I have no idea how to read the modname from the workshop ID, if you know how let me know). 
+
+## How does it do that?
+Your last used mods are stored inside settings.txt located in \Documents\Paradox Interactive\Stellaris. All it does is manipulate the list of active mods inside
+
+
+## Other Stuff
 Is it perfect? No I do this as a hobby and its probably horribly inefficent and breaks the heart of actual programmers, but it works.
 
-I will update it when I see reason to.
+I will update it when I see a reason to.
 
-I will not invlude feature requests unless I really like the idea.
+I should also make a better documentation. Probably.
