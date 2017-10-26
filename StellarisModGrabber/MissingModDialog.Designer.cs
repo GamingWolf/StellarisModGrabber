@@ -31,6 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MissingModDialog));
             this.MissingMain_lbl = new System.Windows.Forms.Label();
             this.Notice_lbl = new System.Windows.Forms.Label();
+            this.LabelNameWorker = new System.ComponentModel.BackgroundWorker();
+            this.LabelNameWoker = new System.ComponentModel.BackgroundWorker();
             this.SuspendLayout();
             // 
             // MissingMain_lbl
@@ -75,5 +77,7 @@
         #endregion
         private System.Windows.Forms.Label MissingMain_lbl;
         private System.Windows.Forms.Label Notice_lbl;
+        private System.ComponentModel.BackgroundWorker LabelNameWorker;
+        private System.ComponentModel.BackgroundWorker LabelNameWoker;
     }
 }

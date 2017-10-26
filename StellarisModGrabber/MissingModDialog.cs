@@ -4,7 +4,9 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -20,10 +22,12 @@ namespace StellarisModGrabber
 
         public static List<string> newMissingMods = new List<string>();
         public List<string> LabelNameList = new List<string>();
+        public List<string> URLTitleList = new List<string>();
         public static int linkNum = 0;
         public LinkLabel[] LinkCollection;
         public LinkLabel LinkLabelA = new LinkLabel();
         public Point LinkSpawn;
+        WebClient title = new WebClient();
         public bool DidIt = false;
 
 
@@ -41,11 +45,13 @@ namespace StellarisModGrabber
             LabelNameList.Clear();
             LinkCollection = new LinkLabel[newMissingMods.Count];
             LinkSpawn = new Point(Notice_lbl.Location.X + 10, Notice_lbl.Location.Y + 30);
-            string temp;
+            string temp, source;
             for (int i = 0; i < newMissingMods.Count; i++)
             {
                 temp = newMissingMods[i].Replace("mod/ugc_", "");
                 LabelNameList.Add("http://steamcommunity.com/sharedfiles/filedetails/?id=" + temp.Replace(".mod", ""));
+                source = title.DownloadString(LabelNameList[i].ToString());
+                URLTitleList.Add(Regex.Match(source, @"\<title\b[^>]*\>\s*(?<Title>[\s\S]*?)\</title\>", RegexOptions.IgnoreCase).Groups["Title"].Value);
             }
         }
 
@@ -57,7 +63,7 @@ namespace StellarisModGrabber
             for (int i = 0; i < newMissingMods.Count; i++)
             {
                 LinkLabelA = new LinkLabel();
-                LinkLabelA.Text = newMissingMods[i].ToString();
+                LinkLabelA.Text = URLTitleList[i].ToString();
                 LinkLabelA.Name = LabelNameList[i];
                 LinkLabelA.Location = LinkSpawn;
                 LinkLabelA.TextAlign = ContentAlignment.MiddleCenter;
