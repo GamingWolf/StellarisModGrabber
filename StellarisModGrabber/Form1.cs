@@ -14,16 +14,16 @@ namespace StellarisModGrabber
             InitializeComponent();
         }
 
-        public string FileLocation = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Paradox Interactive\\Stellaris\\settings.txt";
+        public static string FileLocation = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Paradox Interactive\\Stellaris\\settings.txt";
         public string FileBackUp = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Paradox Interactive\\Stellaris\\settings_BackUp.txt";
         public string InstalledModsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Paradox Interactive\\Stellaris\\";
         public string PrintMissing;
         public bool MissingMod = false, ClearOverWrite = false;
 
-        List<string> Mods = new List<string>();
-        List<string> PastedModsTrim = new List<string>();
+        public static List<string> Mods = new List<string>();
+        public static List<string> PastedModsTrim = new List<string>();
         public static List<string> MissingMods = new List<string>();
-        List<string> PastedMods = new List<string>();
+        public static List<string> PastedMods = new List<string>();
         IEnumerable<string> query;
 
         private void GetModList()
@@ -187,6 +187,12 @@ namespace StellarisModGrabber
             MissingMods.Clear();
             CheckInstalled();
             ExecuteCopy();
+        }
+
+        private void PresetsBtn_Click(object sender, EventArgs e)
+        {
+            PresetDialog PresetForm = new PresetDialog();
+            PresetForm.ShowDialog();
         }
 
         private void ClearModBtn_Click(object sender, EventArgs e)
