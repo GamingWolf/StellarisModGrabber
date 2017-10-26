@@ -1,3 +1,5 @@
+# I found a better tool then what I have made. No longer working on this.
+
 # StellarisModGrabber
 
 Makes switching around mods for MP games easier.
