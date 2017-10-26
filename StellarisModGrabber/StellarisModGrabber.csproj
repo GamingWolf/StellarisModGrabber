@@ -57,6 +57,12 @@
     <Compile Include="MissingModDialog.Designer.cs">
       <DependentUpon>MissingModDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresetDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresetDialog.Designer.cs">
+      <DependentUpon>PresetDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -64,6 +70,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MissingModDialog.resx">
       <DependentUpon>MissingModDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresetDialog.resx">
+      <DependentUpon>PresetDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

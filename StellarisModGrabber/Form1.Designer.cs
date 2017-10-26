@@ -43,6 +43,7 @@
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.ClearModBtn = new System.Windows.Forms.Button();
             this.PresetsBtn = new System.Windows.Forms.Button();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -225,6 +226,7 @@
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.Button ClearModBtn;
         private System.Windows.Forms.Button PresetsBtn;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
 
