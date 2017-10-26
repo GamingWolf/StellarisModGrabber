@@ -189,6 +189,11 @@ namespace StellarisModGrabber
             ExecuteCopy();
         }
 
+        private void PresetsBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void ClearModBtn_Click(object sender, EventArgs e)
         {
             bool MissingRestore = MissingMod;

@@ -42,6 +42,7 @@
             this.RestoreBtn = new System.Windows.Forms.Button();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.ClearModBtn = new System.Windows.Forms.Button();
+            this.PresetsBtn = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -68,7 +69,7 @@
             // 
             // GrabBtn
             // 
-            this.GrabBtn.Location = new System.Drawing.Point(218, 31);
+            this.GrabBtn.Location = new System.Drawing.Point(18, 320);
             this.GrabBtn.Name = "GrabBtn";
             this.GrabBtn.Size = new System.Drawing.Size(89, 23);
             this.GrabBtn.TabIndex = 2;
@@ -78,7 +79,7 @@
             // 
             // CopyGrabBtn
             // 
-            this.CopyGrabBtn.Location = new System.Drawing.Point(218, 60);
+            this.CopyGrabBtn.Location = new System.Drawing.Point(123, 320);
             this.CopyGrabBtn.Name = "CopyGrabBtn";
             this.CopyGrabBtn.Size = new System.Drawing.Size(89, 23);
             this.CopyGrabBtn.TabIndex = 3;
@@ -88,7 +89,7 @@
             // 
             // ExitBtn
             // 
-            this.ExitBtn.Location = new System.Drawing.Point(218, 198);
+            this.ExitBtn.Location = new System.Drawing.Point(218, 118);
             this.ExitBtn.Name = "ExitBtn";
             this.ExitBtn.Size = new System.Drawing.Size(89, 23);
             this.ExitBtn.TabIndex = 4;
@@ -118,7 +119,7 @@
             // 
             // CommitPasteBtn
             // 
-            this.CommitPasteBtn.Location = new System.Drawing.Point(218, 285);
+            this.CommitPasteBtn.Location = new System.Drawing.Point(418, 320);
             this.CommitPasteBtn.Name = "CommitPasteBtn";
             this.CommitPasteBtn.Size = new System.Drawing.Size(89, 23);
             this.CommitPasteBtn.TabIndex = 6;
@@ -128,7 +129,7 @@
             // 
             // PasteBtn
             // 
-            this.PasteBtn.Location = new System.Drawing.Point(218, 256);
+            this.PasteBtn.Location = new System.Drawing.Point(319, 320);
             this.PasteBtn.Name = "PasteBtn";
             this.PasteBtn.Size = new System.Drawing.Size(89, 23);
             this.PasteBtn.TabIndex = 5;
@@ -138,7 +139,7 @@
             // 
             // BackUpBtn
             // 
-            this.BackUpBtn.Location = new System.Drawing.Point(218, 111);
+            this.BackUpBtn.Location = new System.Drawing.Point(218, 31);
             this.BackUpBtn.Name = "BackUpBtn";
             this.BackUpBtn.Size = new System.Drawing.Size(89, 23);
             this.BackUpBtn.TabIndex = 7;
@@ -148,7 +149,7 @@
             // 
             // RestoreBtn
             // 
-            this.RestoreBtn.Location = new System.Drawing.Point(218, 140);
+            this.RestoreBtn.Location = new System.Drawing.Point(218, 60);
             this.RestoreBtn.Name = "RestoreBtn";
             this.RestoreBtn.Size = new System.Drawing.Size(89, 23);
             this.RestoreBtn.TabIndex = 8;
@@ -162,7 +163,7 @@
             // 
             // ClearModBtn
             // 
-            this.ClearModBtn.Location = new System.Drawing.Point(218, 169);
+            this.ClearModBtn.Location = new System.Drawing.Point(218, 89);
             this.ClearModBtn.Name = "ClearModBtn";
             this.ClearModBtn.Size = new System.Drawing.Size(89, 23);
             this.ClearModBtn.TabIndex = 9;
@@ -170,11 +171,22 @@
             this.ClearModBtn.UseVisualStyleBackColor = true;
             this.ClearModBtn.Click += new System.EventHandler(this.ClearModBtn_Click);
             // 
+            // PresetsBtn
+            // 
+            this.PresetsBtn.Location = new System.Drawing.Point(218, 285);
+            this.PresetsBtn.Name = "PresetsBtn";
+            this.PresetsBtn.Size = new System.Drawing.Size(89, 23);
+            this.PresetsBtn.TabIndex = 10;
+            this.PresetsBtn.Text = "Preset Control";
+            this.PresetsBtn.UseVisualStyleBackColor = true;
+            this.PresetsBtn.Click += new System.EventHandler(this.PresetsBtn_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(523, 326);
+            this.ClientSize = new System.Drawing.Size(534, 353);
+            this.Controls.Add(this.PresetsBtn);
             this.Controls.Add(this.ClearModBtn);
             this.Controls.Add(this.RestoreBtn);
             this.Controls.Add(this.BackUpBtn);
@@ -212,6 +224,7 @@
         private System.Windows.Forms.Button RestoreBtn;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.Button ClearModBtn;
+        private System.Windows.Forms.Button PresetsBtn;
     }
 }
 
