@@ -16,14 +16,16 @@ namespace StellarisModGrabber
 
         public static string FileLocation = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Paradox Interactive\\Stellaris\\settings.txt";
         public string FileBackUp = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Paradox Interactive\\Stellaris\\settings_BackUp.txt";
-        public string InstalledModsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Paradox Interactive\\Stellaris\\";
+        public static string InstalledModsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Paradox Interactive\\Stellaris\\";
         public string PrintMissing;
-        public bool MissingMod = false, ClearOverWrite = false;
+        public static bool MissingMod = false, ClearOverWrite = false;
 
         public static List<string> Mods = new List<string>();
         public static List<string> PastedModsTrim = new List<string>();
         public static List<string> MissingMods = new List<string>();
         public static List<string> PastedMods = new List<string>();
+        public static List<string> RealNameList = new List<string>();
+        public static List<string> RealNameListHolder = new List<string>();
         IEnumerable<string> query;
 
         private void GetModList()
@@ -47,9 +49,11 @@ namespace StellarisModGrabber
             }
         }
 
-        private void CheckInstalled()
+        public static void CheckInstalled(List<string> Checker)
         {
-            foreach(string mod in PastedModsTrim)
+            MissingMod = false;
+            MissingMods.Clear();
+            foreach(string mod in Checker)
             {
                 if (!File.Exists(InstalledModsPath + mod))
                 {
@@ -121,6 +125,22 @@ namespace StellarisModGrabber
             }
         }
 
+        private void GetRealNames()
+        {
+            string temp, query2;
+            int count = 0;
+            Mods.Clear();
+            GetModList();
+            foreach (string mod in Mods)
+            {
+                temp = mod.Replace("/", "\\");
+                RealNameListHolder.Add(temp.Replace("\"", ""));
+                query2 = File.ReadLines(InstalledModsPath + RealNameListHolder[count])
+                .First();
+                count++;
+                RealNameList.Add(query2.Replace("name=", ""));
+            }
+        }
 
         private void ExitBtn_Click(object sender, EventArgs e)
         {
@@ -129,15 +149,18 @@ namespace StellarisModGrabber
 
         private void GrabBtn_Click(object sender, EventArgs e)
         {
+            RealNameList.Clear();
+            GetRealNames();
             Mods.Clear();
             GetModList();
             GrabbedListBox.Items.Clear();
             int count = 0;
-            foreach (string mod in Mods)
+            foreach (string mod in RealNameList)
             {
-                GrabbedListBox.Items.Add(Mods[count]);
+                GrabbedListBox.Items.Add(RealNameList[count]);
                 count++;
             }
+            Clipboard.SetText(GrabbedListBox.ToString());
         }
 
         private void BackUpBtn_Click(object sender, EventArgs e)
@@ -185,7 +208,7 @@ namespace StellarisModGrabber
         private void CommitPasteBtn_Click(object sender, EventArgs e)
         {
             MissingMods.Clear();
-            CheckInstalled();
+            CheckInstalled(PastedModsTrim);
             ExecuteCopy();
         }
 

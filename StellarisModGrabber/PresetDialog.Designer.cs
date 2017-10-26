@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PresetDialog));
             this.PresetContent = new System.Windows.Forms.ListBox();
             this.PresetGrpBox = new System.Windows.Forms.GroupBox();
             this.PresetSelectBox = new System.Windows.Forms.ComboBox();
@@ -37,6 +38,7 @@
             this.DeletePresetBtn = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.PresetName = new System.Windows.Forms.TextBox();
+            this.LoadPresetBtn = new System.Windows.Forms.Button();
             this.PresetGrpBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -97,6 +99,7 @@
             this.FromPasteBtn.TabIndex = 6;
             this.FromPasteBtn.Text = "Create new from Clipboard";
             this.FromPasteBtn.UseVisualStyleBackColor = true;
+            this.FromPasteBtn.Click += new System.EventHandler(this.FromPasteBtn_Click);
             // 
             // DeletePresetBtn
             // 
@@ -126,11 +129,22 @@
             this.PresetName.Text = "Default";
             this.PresetName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // LoadPresetBtn
+            // 
+            this.LoadPresetBtn.Location = new System.Drawing.Point(218, 229);
+            this.LoadPresetBtn.Name = "LoadPresetBtn";
+            this.LoadPresetBtn.Size = new System.Drawing.Size(120, 35);
+            this.LoadPresetBtn.TabIndex = 10;
+            this.LoadPresetBtn.Text = "Load Preset";
+            this.LoadPresetBtn.UseVisualStyleBackColor = true;
+            this.LoadPresetBtn.Click += new System.EventHandler(this.LoadPresetBtn_Click);
+            // 
             // PresetDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(346, 324);
+            this.Controls.Add(this.LoadPresetBtn);
             this.Controls.Add(this.PresetName);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.DeletePresetBtn);
@@ -140,8 +154,10 @@
             this.Controls.Add(this.PresetSelectBox);
             this.Controls.Add(this.PresetGrpBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "PresetDialog";
-            this.Text = "PresetDialog";
+            this.Text = "Preset Manager";
             this.PresetGrpBox.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -159,5 +175,6 @@
         private System.Windows.Forms.Button DeletePresetBtn;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox PresetName;
+        private System.Windows.Forms.Button LoadPresetBtn;
     }
 }

@@ -24,25 +24,10 @@ namespace StellarisModGrabber
         public static List<string> PresetListGrabbed = new List<string>();
         public static List<string> PresetListPasted = new List<string>();
         public static List<string> ExistingPresets = new List<string>();
+        public static List<string> RealNameList = new List<string>();
+        public static List<string> RealNameListHolder = new List<string>();
         public bool IntDone = false;
         IEnumerable<string> query;
-
-        public static void PassList(List<string> Passer)
-        {
-            if(Passer.Count > 0)
-            {
-                PresetListPasted.Clear();
-                foreach(string mod in Passer)
-                {
-                    PresetListPasted.Add(mod);
-                    
-                }
-            }
-            else
-            {
-                MessageBox.Show("The list you are trieng to grab is empty.");
-            }
-        }
 
         private void IntPresets()
         {
@@ -69,26 +54,62 @@ namespace StellarisModGrabber
             IntDone = true;
         }
 
+        private void GetRealNames()
+        {
+            RealNameList.Clear();
+            string query;
+            int count = 0;
+            if (!Form1.MissingMod)
+            {
+                foreach (string mod in PresetListPasted)
+                {
+                    query = File.ReadLines(Form1.InstalledModsPath + PresetListPasted[count])
+                    .First();
+                    count++;
+                    RealNameList.Add(query.Replace("name=", ""));
+                    PresetContent.Items.Add(query.Replace("name=", ""));
+                }
+            }
+            else if (Form1.MissingMod)
+            {
+                MissingModDialog MissForm = new MissingModDialog();
+                MissForm.ShowDialog();
+            }
+        }
+
         private void PresetSelectBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (IntDone && File.Exists(PresetPath + PresetSelectList[Convert.ToInt32(PresetSelectBox.SelectedValue.ToString())]))
+            int count = 0;
+            try
             {
-                PresetContent.Items.Clear();
-                query = File.ReadLines(PresetPath + PresetSelectList[Convert.ToInt32(PresetSelectBox.SelectedValue.ToString())])
-                                .SkipWhile(line => !line.Contains("last_mods={"))
-                                .Skip(1)
-                                .TakeWhile(line => !line.Contains("}"));
-
-                foreach (string mod in query)
+                if (IntDone && File.Exists(PresetPath + PresetSelectList[Convert.ToInt32(PresetSelectBox.SelectedValue.ToString())]))
                 {
-                    PresetContent.Items.Add(mod.Trim());
-                }
+                    PresetGrpBox.Text = PresetSelectList[Convert.ToInt32(PresetSelectBox.SelectedValue.ToString())];
+                    PresetContent.Items.Clear();
+                    PresetListPasted.Clear();
+                    query = File.ReadLines(PresetPath + PresetSelectList[Convert.ToInt32(PresetSelectBox.SelectedValue.ToString())])
+                                    .SkipWhile(line => !line.Contains("last_mods={"))
+                                    .Skip(1)
+                                    .TakeWhile(line => !line.Contains("}"));
 
+                    foreach (string mod in query)
+                    {
+                        PresetListPasted.Add(mod.Replace("\"", "").Trim());
+                    }
+                    Form1.CheckInstalled(PresetListPasted);
+                    GetRealNames();
+                    foreach (string real in RealNameList)
+                    {
+                        PresetContent.Items.Add(RealNameList[count]);
+                        count++;
+                    }
+                }
+                else if (IntDone)
+                {
+                    MessageBox.Show("The selected file does not exist.");
+                }
             }
-            else if(IntDone)
-            {
-                MessageBox.Show("The selected file does not exist.");
-            }
+            catch { }
         }
 
         private void FromCurrentBtn_Click(object sender, EventArgs e)
@@ -112,11 +133,78 @@ namespace StellarisModGrabber
             {
                 MessageBox.Show("Last preset deleted. \n" +
                                 "The name will remain until you restart the program.");
+                IntPresets();
             }
             else
             {
                 MessageBox.Show("Preset deleted.");
+                IntPresets();
             }
+        }
+
+        private void FromPasteBtn_Click(object sender, EventArgs e)
+        {
+            PresetContent.Items.Clear();
+            PresetListPasted.Clear();
+            string s = Clipboard.GetText(), temp;
+            string[] pasted = s.Split('\n');
+            foreach (string pastedmods in pasted)
+            {
+                temp = pastedmods.Replace("/", "\\");
+                PresetListPasted.Add(temp.Replace("\"", "").Trim());
+            }
+            RealNameList.Clear();
+            Form1.CheckInstalled(PresetListPasted);
+            if (!Form1.MissingMod && !File.Exists(PresetPath + PresetName.Text + ".txt"))
+            {
+                GetRealNames();
+                File.Copy(@Form1.FileLocation, @PresetPath + PresetName.Text + ".txt");
+
+                if (!Form1.MissingMod && PresetListPasted.Count != 0)
+                {
+                    var newMods = new StringBuilder();
+                    newMods.Append("last_mods={");
+                    newMods.Append("\n");
+                    foreach (var mod in PresetListPasted)
+                    {
+                        newMods.Append(mod.Replace("\\", "/"));
+                        newMods.Append("\n");
+                    }
+
+
+                    string fileContents = File.ReadAllText(PresetPath + PresetName.Text + ".txt");
+
+
+                    var startIndex = fileContents.IndexOf("last_mods");
+                    var stopIndex = fileContents.IndexOf("}", startIndex);
+
+                    var substring = fileContents.Substring(startIndex, stopIndex - startIndex);
+                    var newContents = fileContents.Replace(substring, newMods.ToString());
+
+
+                    using (var file = new StreamWriter(File.Create(PresetPath + PresetName.Text + ".txt")))
+                    {
+                        file.Write(newContents);
+                    }
+                    IntPresets();
+                }
+            }
+            else if(File.Exists(PresetPath + PresetName.Text + ".txt"))
+            {
+                MessageBox.Show("A preset with the given name already exists.");
+            }
+            else if (Form1.MissingMod)
+            {
+                MissingModDialog MissForm = new MissingModDialog();
+                MissForm.ShowDialog();
+            }
+        }
+
+        private void LoadPresetBtn_Click(object sender, EventArgs e)
+        {
+            File.Delete(Form1.FileLocation);
+            File.Copy(@PresetPath + PresetSelectList[Convert.ToInt32(PresetSelectBox.SelectedValue.ToString())], @Form1.FileLocation);
+            MessageBox.Show("Preset loaded.");
         }
     }
 }

@@ -53,6 +53,7 @@
             this.GrabbedListBox.BackColor = System.Drawing.SystemColors.Control;
             this.GrabbedListBox.ForeColor = System.Drawing.SystemColors.WindowText;
             this.GrabbedListBox.FormattingEnabled = true;
+            this.GrabbedListBox.HorizontalScrollbar = true;
             this.GrabbedListBox.Location = new System.Drawing.Point(6, 19);
             this.GrabbedListBox.Name = "GrabbedListBox";
             this.GrabbedListBox.Size = new System.Drawing.Size(188, 277);
@@ -113,6 +114,7 @@
             this.InputListBox.BackColor = System.Drawing.SystemColors.Control;
             this.InputListBox.ForeColor = System.Drawing.SystemColors.WindowText;
             this.InputListBox.FormattingEnabled = true;
+            this.InputListBox.HorizontalScrollbar = true;
             this.InputListBox.Location = new System.Drawing.Point(6, 19);
             this.InputListBox.Name = "InputListBox";
             this.InputListBox.Size = new System.Drawing.Size(188, 277);
@@ -186,6 +188,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(534, 353);
             this.Controls.Add(this.PresetsBtn);
             this.Controls.Add(this.ClearModBtn);
