@@ -101,14 +101,15 @@ namespace StellarisModGrabber
         
         private void BgWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            string temp, source;
+            string temp, tempURL, source;
             int i = 0;
             foreach (string mod in newMissingMods)
             {
                 temp = newMissingMods[i].Replace("/", "");
                 LabelNameList.Add("http://steamcommunity.com/sharedfiles/filedetails/?id=" + temp.Replace(".mod", ""));
                 source = title.DownloadString(LabelNameList[i].ToString());
-                URLTitleList.Add(Regex.Match(source, @"\<title\b[^>]*\>\s*(?<Title>[\s\S]*?)\</title\>", RegexOptions.IgnoreCase).Groups["Title"].Value);
+                tempURL = Regex.Match(source, @"\<title\b[^>]*\>\s*(?<Title>[\s\S]*?)\</title\>", RegexOptions.IgnoreCase).Groups["Title"].Value;
+                URLTitleList.Add(tempURL.Replace("Steam Workshop :: ", ""));
                 SetText(i);
                 i++;
             }
@@ -128,7 +129,7 @@ namespace StellarisModGrabber
             {
                 NameGenerationProgress.Visible = false;
                 NameGenerationProgress.Enabled = false;
-                Notice_lbl.Text = "File has not been written! \n Download missing mods below and try again.";
+                Notice_lbl.Text = "File has not been written! \n Download missing mods from the workshop below and try again.";
                 title.Dispose();
                 CreateLabels();
             }

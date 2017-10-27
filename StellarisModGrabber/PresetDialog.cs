@@ -62,10 +62,12 @@ namespace StellarisModGrabber
             int count = 0;
             if (!Form1.MissingMod)
             {
+                string temp;
                 foreach (string mod in PresetListPasted)
                 {
-                    query = File.ReadLines(Form1.InstalledModsPath + PresetListPasted[count])
-                    .First();
+                    temp = PresetListPasted[count].Replace("\\", "mod\\ugc_") + ".mod";
+                    query = File.ReadLines(Form1.InstalledModsPath + temp)
+                                .First();
                     count++;
                     RealNameList.Add(query.Replace("name=", ""));
                     PresetContent.Items.Add(query.Replace("name=", ""));
@@ -81,6 +83,7 @@ namespace StellarisModGrabber
         private void PresetSelectBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             int count = 0;
+            string temp;
             try
             {
                 if (IntDone && File.Exists(PresetPath + PresetSelectList[Convert.ToInt32(PresetSelectBox.SelectedValue.ToString())]))
@@ -96,7 +99,8 @@ namespace StellarisModGrabber
 
                     foreach (string mod in query)
                     {
-                        PresetListPasted.Add(mod.Replace("\"", "").Trim());
+                        temp = mod.Replace("\"mod/ugc_", "\\").Trim();
+                        PresetListPasted.Add(temp.Replace(".mod\"", ""));
                     }
                     Form1.CheckInstalled(PresetListPasted);
                     GetRealNames();
@@ -146,6 +150,7 @@ namespace StellarisModGrabber
 
         private void FromPasteBtn_Click(object sender, EventArgs e)
         {
+            Directory.GetDirectories(Form1.SteamModPath);
             PresetContent.Items.Clear();
             PresetListPasted.Clear();
             PresetListPasted.TrimExcess();
@@ -153,8 +158,8 @@ namespace StellarisModGrabber
             string[] pasted = s.Split('\n');
             foreach (string pastedmods in pasted)
             {
-                temp = pastedmods.Replace("/", "\\");
-                PresetListPasted.Add(temp.Replace("\"", "").Trim());
+                temp = pastedmods.Replace("\"mod/ugc_", "\\");
+                PresetListPasted.Add(temp.Replace(".mod\"", "").Trim());
             }
             RealNameList.Clear();
             RealNameList.TrimExcess();
