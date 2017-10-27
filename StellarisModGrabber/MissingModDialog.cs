@@ -48,14 +48,14 @@ namespace StellarisModGrabber
             PassList(Form1.MissingMods);
             NameGenerationProgress.Maximum = newMissingMods.Count() - 1;
             Notice_lbl.Text = "Generating missing mod list, please wait";
-            BgWorker.RunWorkerAsync();
-            PassList(Form1.MissingMods);
             LabelNameList.Clear();
-            LabelNameList.TrimExcess();
+            LabelNameList.TrimExcess();      
             URLTitleList.Clear();
             URLTitleList.TrimExcess();
+            BgWorker.RunWorkerAsync();
             LinkCollection = new LinkLabel[newMissingMods.Count];
             LinkSpawn = new Point(Notice_lbl.Location.X + 10, Notice_lbl.Location.Y + 30);
+            
         }
 
         private void CreateLabels()
@@ -98,17 +98,19 @@ namespace StellarisModGrabber
 
             System.Diagnostics.Process.Start(((LinkLabel)sender).Name);
         }
-
+        
         private void BgWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             string temp, source;
-            for (int i = 0; i < newMissingMods.Count; i++)
+            int i = 0;
+            foreach (string mod in newMissingMods)
             {
                 temp = newMissingMods[i].Replace("/", "");
                 LabelNameList.Add("http://steamcommunity.com/sharedfiles/filedetails/?id=" + temp.Replace(".mod", ""));
                 source = title.DownloadString(LabelNameList[i].ToString());
                 URLTitleList.Add(Regex.Match(source, @"\<title\b[^>]*\>\s*(?<Title>[\s\S]*?)\</title\>", RegexOptions.IgnoreCase).Groups["Title"].Value);
                 SetText(i);
+                i++;
             }
         }
 
