@@ -18,6 +18,7 @@ namespace StellarisModGrabber
         {
             InitializeComponent();
             LabelNames();
+            Refresh();
         }
 
         public static List<string> newMissingMods = new List<string>();
@@ -34,6 +35,7 @@ namespace StellarisModGrabber
         public static void PassList(List<string> Passer)
         {
             newMissingMods.Clear();
+            newMissingMods.TrimExcess();
             foreach(string mod in Passer)
             {
                 newMissingMods.Add(mod.Replace("\\","/"));
@@ -49,6 +51,9 @@ namespace StellarisModGrabber
             BgWorker.RunWorkerAsync();
             PassList(Form1.MissingMods);
             LabelNameList.Clear();
+            LabelNameList.TrimExcess();
+            URLTitleList.Clear();
+            URLTitleList.TrimExcess();
             LinkCollection = new LinkLabel[newMissingMods.Count];
             LinkSpawn = new Point(Notice_lbl.Location.X + 10, Notice_lbl.Location.Y + 30);
         }
@@ -99,7 +104,7 @@ namespace StellarisModGrabber
             string temp, source;
             for (int i = 0; i < newMissingMods.Count; i++)
             {
-                temp = newMissingMods[i].Replace("mod/ugc_", "");
+                temp = newMissingMods[i].Replace("/", "");
                 LabelNameList.Add("http://steamcommunity.com/sharedfiles/filedetails/?id=" + temp.Replace(".mod", ""));
                 source = title.DownloadString(LabelNameList[i].ToString());
                 URLTitleList.Add(Regex.Match(source, @"\<title\b[^>]*\>\s*(?<Title>[\s\S]*?)\</title\>", RegexOptions.IgnoreCase).Groups["Title"].Value);
@@ -122,8 +127,14 @@ namespace StellarisModGrabber
                 NameGenerationProgress.Visible = false;
                 NameGenerationProgress.Enabled = false;
                 Notice_lbl.Text = "File has not been written! \n Download missing mods below and try again.";
+                title.Dispose();
                 CreateLabels();
             }
+        }
+
+        void MissForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Dispose();
         }
     }
 }

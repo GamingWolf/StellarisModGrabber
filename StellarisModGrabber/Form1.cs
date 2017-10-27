@@ -12,11 +12,13 @@ namespace StellarisModGrabber
         public Form1()
         {
             InitializeComponent();
+            CheckSteamDirectory();
         }
 
         public static string FileLocation = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Paradox Interactive\\Stellaris\\settings.txt";
         public string FileBackUp = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Paradox Interactive\\Stellaris\\settings_BackUp.txt";
         public static string InstalledModsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Paradox Interactive\\Stellaris\\";
+        public static string SteamModPath = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles) + "\\Steam\\steamapps\\workshop\\content\\";
         public string PrintMissing;
         public static bool MissingMod = false, ClearOverWrite = false;
 
@@ -30,7 +32,39 @@ namespace StellarisModGrabber
         IEnumerable<string> query;
 
 
+        private void CheckSteamDirectory()
+        {
+            if (!File.Exists(InstalledModsPath + "Presets\\Location\\location.txt"))
+            {
+                if (!Directory.Exists(SteamModPath))
+                {
+                    SteamModPath = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86) + "\\Steam\\steamapps\\workshop\\content\\";
+                    if (!Directory.Exists(SteamModPath))
+                    {
+                        Directory.CreateDirectory(InstalledModsPath + "Presets\\Location\\");
+                        FolderBrowserDialog steam = new FolderBrowserDialog();
+                        steam.Description = "Steam not found. \n Please select your steam install directory (steam.exe is in this folder).";
+                        steam.ShowNewFolderButton = false;
+                        steam.ShowDialog(this);
+                        SteamModPath = steam.SelectedPath + "\\steamapps\\workshop\\content\\281990";
 
+                        var location = new StringBuilder();
+                        location.Append(SteamModPath);
+
+                        using (var file = new StreamWriter(File.Create(InstalledModsPath + "Presets\\Location\\location.txt")))
+                        {
+                            file.Write(location);
+                        }
+                        Refresh();
+                    }
+                }
+            }
+            else
+            {
+                SteamModPath = File.ReadLines(InstalledModsPath + "Presets\\Location\\location.txt")
+                                   .First();
+            }
+        }
         private void GetModList()
         {
             if (File.Exists(FileLocation))
@@ -56,9 +90,11 @@ namespace StellarisModGrabber
         {
             MissingMod = false;
             MissingMods.Clear();
+            MissingMods.TrimExcess();
+            Directory.GetDirectories(SteamModPath);
             foreach(string mod in Checker)
             {
-                if (!File.Exists(InstalledModsPath + mod))
+                if (!Directory.Exists(SteamModPath + mod))
                 {
                     MissingMods.Add(mod);
                     MissingMod = true;
@@ -69,10 +105,12 @@ namespace StellarisModGrabber
         private void TrimPasted()
         {
             PastedModsTrim.Clear();
+            PastedModsTrim.TrimExcess();
             string temp;
             for(int i = 0; i < PastedMods.Count; i++)
             {
-                temp = PastedMods[i].Replace("/", "\\");
+                temp = PastedMods[i].Replace("\"mod/ugc_", "\\");
+                temp = temp.Replace(".mod\"", "");
                 PastedModsTrim.Add(temp.Replace("\"", ""));
             }
         }
@@ -120,6 +158,7 @@ namespace StellarisModGrabber
             else if (MissingMod)
             {
                 MissingModDialog MissForm = new MissingModDialog();
+                
                 MissForm.ShowDialog();
             }
             else
@@ -133,6 +172,7 @@ namespace StellarisModGrabber
             string temp, query2;
             int count = 0;
             Mods.Clear();
+            Mods.TrimExcess();
             GetModList();
             foreach (string mod in Mods)
             {
@@ -153,8 +193,10 @@ namespace StellarisModGrabber
         private void GrabBtn_Click(object sender, EventArgs e)
         {
             RealNameList.Clear();
+            RealNameList.TrimExcess();
             GetRealNames();
             Mods.Clear();
+            Mods.TrimExcess();
             GetModList();
             GrabbedListBox.Items.Clear();
             int count = 0;
@@ -197,6 +239,7 @@ namespace StellarisModGrabber
         {
             InputListBox.Items.Clear();
             PastedMods.Clear();
+            PastedMods.TrimExcess();
             MissingMod = false;
             string s = Clipboard.GetText();
             string[] pasted = s.Split('\n');
@@ -211,6 +254,7 @@ namespace StellarisModGrabber
         private void CommitPasteBtn_Click(object sender, EventArgs e)
         {
             MissingMods.Clear();
+            MissingMods.TrimExcess();
             CheckInstalled(PastedModsTrim);
             ExecuteCopy();
         }
@@ -227,6 +271,7 @@ namespace StellarisModGrabber
             MissingMod = false;
             ClearOverWrite = true;
             PastedMods.Clear();
+            PastedMods.TrimExcess();
             ExecuteCopy();
             MissingMod = MissingRestore;
             foreach (string mod in InputListBox.Items)

@@ -57,6 +57,7 @@ namespace StellarisModGrabber
         private void GetRealNames()
         {
             RealNameList.Clear();
+            RealNameList.TrimExcess();
             string query;
             int count = 0;
             if (!Form1.MissingMod)
@@ -87,6 +88,7 @@ namespace StellarisModGrabber
                     PresetGrpBox.Text = PresetSelectList[Convert.ToInt32(PresetSelectBox.SelectedValue.ToString())];
                     PresetContent.Items.Clear();
                     PresetListPasted.Clear();
+                    PresetListPasted.TrimExcess();
                     query = File.ReadLines(PresetPath + PresetSelectList[Convert.ToInt32(PresetSelectBox.SelectedValue.ToString())])
                                     .SkipWhile(line => !line.Contains("last_mods={"))
                                     .Skip(1)
@@ -146,6 +148,7 @@ namespace StellarisModGrabber
         {
             PresetContent.Items.Clear();
             PresetListPasted.Clear();
+            PresetListPasted.TrimExcess();
             string s = Clipboard.GetText(), temp;
             string[] pasted = s.Split('\n');
             foreach (string pastedmods in pasted)
@@ -154,6 +157,7 @@ namespace StellarisModGrabber
                 PresetListPasted.Add(temp.Replace("\"", "").Trim());
             }
             RealNameList.Clear();
+            RealNameList.TrimExcess();
             Form1.CheckInstalled(PresetListPasted);
             if (!Form1.MissingMod && !File.Exists(PresetPath + PresetName.Text + ".txt"))
             {
