@@ -20,6 +20,7 @@ namespace StellarisModGrabber
         public string PrintMissing;
         public static bool MissingMod = false, ClearOverWrite = false;
 
+
         public static List<string> Mods = new List<string>();
         public static List<string> PastedModsTrim = new List<string>();
         public static List<string> MissingMods = new List<string>();
@@ -27,6 +28,8 @@ namespace StellarisModGrabber
         public static List<string> RealNameList = new List<string>();
         public static List<string> RealNameListHolder = new List<string>();
         IEnumerable<string> query;
+
+
 
         private void GetModList()
         {

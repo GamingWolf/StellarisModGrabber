@@ -43,7 +43,6 @@
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.ClearModBtn = new System.Windows.Forms.Button();
             this.PresetsBtn = new System.Windows.Forms.Button();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -184,21 +183,12 @@
             this.PresetsBtn.UseVisualStyleBackColor = true;
             this.PresetsBtn.Click += new System.EventHandler(this.PresetsBtn_Click);
             // 
-            // progressBar1
-            // 
-            this.progressBar1.Location = new System.Drawing.Point(218, 320);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(89, 23);
-            this.progressBar1.Step = 1;
-            this.progressBar1.TabIndex = 11;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(534, 353);
-            this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.PresetsBtn);
             this.Controls.Add(this.ClearModBtn);
             this.Controls.Add(this.RestoreBtn);
@@ -238,7 +228,6 @@
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.Button ClearModBtn;
         private System.Windows.Forms.Button PresetsBtn;
-        private System.Windows.Forms.ProgressBar progressBar1;
     }
 }
 

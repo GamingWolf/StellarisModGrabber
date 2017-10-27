@@ -31,8 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MissingModDialog));
             this.MissingMain_lbl = new System.Windows.Forms.Label();
             this.Notice_lbl = new System.Windows.Forms.Label();
-            this.LabelNameWorker = new System.ComponentModel.BackgroundWorker();
-            this.LabelNameWoker = new System.ComponentModel.BackgroundWorker();
+            this.NameGenerationProgress = new System.Windows.Forms.ProgressBar();
+            this.BgWorker = new System.ComponentModel.BackgroundWorker();
             this.SuspendLayout();
             // 
             // MissingMain_lbl
@@ -54,13 +54,26 @@
             this.Notice_lbl.Text = "File has not been written!\r\nDownload missing mods below and try again.";
             this.Notice_lbl.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
+            // NameGenerationProgress
+            // 
+            this.NameGenerationProgress.Location = new System.Drawing.Point(18, 79);
+            this.NameGenerationProgress.Name = "NameGenerationProgress";
+            this.NameGenerationProgress.Size = new System.Drawing.Size(324, 23);
+            this.NameGenerationProgress.Step = 1;
+            this.NameGenerationProgress.TabIndex = 3;
+            // 
+            // BgWorker
+            // 
+            this.BgWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BgWorker_DoWork);
+            // 
             // MissingModDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(354, 103);
+            this.ClientSize = new System.Drawing.Size(354, 115);
+            this.Controls.Add(this.NameGenerationProgress);
             this.Controls.Add(this.Notice_lbl);
             this.Controls.Add(this.MissingMain_lbl);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -68,6 +81,7 @@
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(370, 657);
             this.Name = "MissingModDialog";
+            this.Padding = new System.Windows.Forms.Padding(0, 0, 0, 20);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "WARNING!";
             this.ResumeLayout(false);
@@ -77,7 +91,7 @@
         #endregion
         private System.Windows.Forms.Label MissingMain_lbl;
         private System.Windows.Forms.Label Notice_lbl;
-        private System.ComponentModel.BackgroundWorker LabelNameWorker;
-        private System.ComponentModel.BackgroundWorker LabelNameWoker;
+        private System.Windows.Forms.ProgressBar NameGenerationProgress;
+        private System.ComponentModel.BackgroundWorker BgWorker;
     }
 }
