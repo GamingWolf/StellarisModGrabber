@@ -3,7 +3,7 @@
 Makes switching around mods for MP games easier.
 
 ## ![Download latest build](https://github.com/GamingWolf/StellarisModGrabber/releases)
-Current version : v0.2.1
+Current version : v0.2.2
 
 ## Features
 * Enable and disbale a lot of mods:
