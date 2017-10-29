@@ -18,7 +18,7 @@ namespace StellarisModGrabber
         public static string FileLocation = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Paradox Interactive\\Stellaris\\settings.txt";
         public string FileBackUp = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Paradox Interactive\\Stellaris\\settings_BackUp.txt";
         public static string InstalledModsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Paradox Interactive\\Stellaris\\";
-        public static string SteamModPath = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles) + "\\Steam\\steamapps\\workshop\\content\\";
+        public static string SteamModPath = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles) + "\\Steam\\steamapps\\workshop\\content\\281990";
         public string PrintMissing;
         public static bool MissingMod = false, ClearOverWrite = false;
 
@@ -38,7 +38,7 @@ namespace StellarisModGrabber
             {
                 if (!Directory.Exists(SteamModPath))
                 {
-                    SteamModPath = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86) + "\\Steam\\steamapps\\workshop\\content\\";
+                    SteamModPath = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86) + "\\Steam\\steamapps\\workshop\\content\\281990";
                     if (!Directory.Exists(SteamModPath))
                     {
                         Directory.CreateDirectory(InstalledModsPath + "Presets\\Location\\");
