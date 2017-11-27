@@ -224,7 +224,7 @@ namespace StellarisModGrabber
             }
             else
             {
-                MessageBox.Show("You are trieng to copy an empty list. \n Please press \"Grab mods\" before trieng to copy.");
+                MessageBox.Show("You are trying to copy an empty list. \n Please press \"Grab mods\" before trying to copy.");
             }
         }
 
