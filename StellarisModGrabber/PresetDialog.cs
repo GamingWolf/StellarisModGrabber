@@ -19,7 +19,7 @@ namespace StellarisModGrabber
             IntPresets();
         }
 
-        public string PresetPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Paradox Interactive\\Stellaris\\Presets\\";
+        public static string PresetPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Paradox Interactive\\Presets\\";
         Dictionary<int, string> PresetSelectList = new Dictionary<int, string>();
         public static List<string> PresetListGrabbed = new List<string>();
         public static List<string> PresetListPasted = new List<string>();

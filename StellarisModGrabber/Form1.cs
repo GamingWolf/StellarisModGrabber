@@ -34,7 +34,7 @@ namespace StellarisModGrabber
 
         private void CheckSteamDirectory()
         {
-            if (!File.Exists(InstalledModsPath + "Presets\\Location\\location.txt"))
+            if (!File.Exists(PresetDialog.PresetPath + "Location\\location.txt"))
             {
                 if (!Directory.Exists(SteamModPath))
                 {
@@ -61,8 +61,8 @@ namespace StellarisModGrabber
             }
             else
             {
-                SteamModPath = File.ReadLines(InstalledModsPath + "Presets\\Location\\location.txt")
-                                   .First();
+                SteamModPath = File.ReadLines(PresetDialog.PresetPath + "Location\\location.txt").First();
+                                   
             }
         }
         private void GetModList()
@@ -217,8 +217,15 @@ namespace StellarisModGrabber
 
         private void CopyGrabBtn_Click(object sender, EventArgs e)
         {
-            Clipboard.Clear();
-            Clipboard.SetText(string.Join("\n", Mods));
+            if (GrabbedListBox.Items.Count != 0)
+            {
+                Clipboard.Clear();
+                Clipboard.SetText(string.Join("\n", Mods));
+            }
+            else
+            {
+                MessageBox.Show("You are trieng to copy an empty list. \n Please press \"Grab mods\" before trieng to copy.");
+            }
         }
 
         private void RestoreBtn_Click(object sender, EventArgs e)
