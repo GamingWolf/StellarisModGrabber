@@ -3,7 +3,7 @@
 Makes switching around mods for MP games easier.
 
 ## ![Download latest build](https://github.com/GamingWolf/StellarisModGrabber/releases)
-Current version : v0.2.2
+Current version : v0.2.3
 
 ## Features
 * Enable and disbale a lot of mods:
@@ -21,6 +21,8 @@ Current version : v0.2.2
 ## The Future
 As long as I enjoy playing stellaris and writing code this project should always be in some kind of working order.
 Please note that I am not a proffessional programmer and will make a lot of mistakes. These mistakes will probably create some nasty bugs, if you find one please create a new [Issue](https://github.com/GamingWolf/StellarisModGrabber/issues) and I will fix it as soon as I can.
+
+I am wroking on making this mod manager work on all bigger paradox titles that i play (eu4, ck2 and stellaris).
 
 ## Disclaimer
 
