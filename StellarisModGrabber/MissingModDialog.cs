@@ -81,14 +81,14 @@ namespace StellarisModGrabber
 
         private void SetText(int value)
         {
-            if (this.NameGenerationProgress.InvokeRequired)
+            if (NameGenerationProgress.InvokeRequired)
             {
                 SetProgressCallback d = new SetProgressCallback(SetText);
                 this.Invoke(d, new object[] { value });
             }
             else
             {
-                this.NameGenerationProgress.Value = value;
+                NameGenerationProgress.Value = value;
             }
         }
 
