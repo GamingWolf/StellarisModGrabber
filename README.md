@@ -12,7 +12,7 @@ Current version : v0.2.3
   * Manage, create and load presets.
 * Finds missing mods:
   * Find and creates links to mods you are missing to use a given mod list.
-  * *If you miss a lot of mods this can take a while!*
+  * [*If you miss a lot of mods this can take a while!*](https://i.imgur.com/BPDb3Nk.gif)
 
 ## Instructions
 
